@@ -1,9 +1,12 @@
-from rbs.rbs import RBS
+from rbs.rbs import RuleBasedSystem as RBS
 
 class MonekyProblem:
 
     def __init__(self, sim, simulator):
-        self.rbs = RBS(sim, simulator)
+        self.rbs = \
+            RBS(sim, simulator) \
+                .build(200)
+
         self.rbs.addRule(
             (
                 "eatFruit",
