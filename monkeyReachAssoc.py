@@ -55,7 +55,7 @@ unit = rbs.association.inheritance.getUnitNumber("monkey")
 primeTimes = [5]
 primeArray = {'spike_times': [primeTimes]}
 generator = sim.Population(1, sim.SpikeSourceArray, primeArray)
-rbs.fsa.turnOnStateFromSpikeSource(generator, rbs.association.topology.neuralHierarchyTopology.cells, unit)
+rbs.fsa.turnOnStateFromSpikeSource(generator, rbs.association.topology.neuralHierarchyTopology.cells, unit*10)
 
 ## Run
 sim.run(simTime)
