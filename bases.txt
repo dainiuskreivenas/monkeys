@@ -1,8 +1,11 @@
-monkey
+animal
 mammal
-canary
 bird
+monkey
+canary
 @@@@@@@
 canary isA bird
 monkey isA mammal
+bird isA animal
+mammal isA animal
 @@@@@@@
