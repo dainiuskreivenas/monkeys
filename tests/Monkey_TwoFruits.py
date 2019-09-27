@@ -23,13 +23,13 @@ sim.setup(timestep=1.0,min_delay=1.0,max_delay=1.0, debug=0)
 #mp = MonekyProblem(sim, "spinnaker")
 mp = MonekyProblem(sim, "nest")
 
-mp.rbs.addFact(("chairAt", (2,)))
-mp.rbs.addFact(("fruit",("banana",0)))
-mp.rbs.addFact(("fruit",("apple",1)))
+mp.rbs.addFact("chairAt", (2,))
+mp.rbs.addFact("fruit",("banana",0))
+mp.rbs.addFact("fruit",("apple",1))
 
 sim.run(200)
 
-mp.printSpikes("Monkey_TwoFruits")
+mp.printSpikes()
 
 sim.end()
 

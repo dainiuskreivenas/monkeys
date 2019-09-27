@@ -4,10 +4,9 @@ Simple test for monkey reach using associations
 
 """
 import pyNN.nest as sim
-
-from rbs.stateMachineClass import FSAHelperFunctions
-from rbs.association import Association
-from rbs.rbsBuilder import RuleBasedSystemBuilder
+from rbs import FSAHelperFunctions
+from rbs import Association
+from rbs import RuleBasedSystemBuilder
 
 sim.setup(timestep=1.0,min_delay=1.0,max_delay=1.0, debug=0)
 
