@@ -1,14 +1,14 @@
 from rbs import FSAHelperFunctions
+from rbs import NealCoverFunctions
 from rbs import RuleBasedSystemBuilder
 
 class MonekyProblem:
 
     def __init__(self, sim, simulator):
-        self.fsa = FSAHelperFunctions(sim, simulator)
+        self.neal = NealCoverFunctions(simulator, sim)
+        self.fsa = FSAHelperFunctions(simulator, sim, self.neal)
 
-        self.rbs = \
-            RuleBasedSystemBuilder(sim, simulator, self.fsa) \
-                .build()
+        self.rbs = RuleBasedSystemBuilder(sim, simulator, self.fsa).build()
 
         self.rbs.addRule(
             "eatFruit",

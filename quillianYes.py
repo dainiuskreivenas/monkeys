@@ -5,22 +5,24 @@ Simple test for monkey reach using associations
 """
 import pyNN.nest as sim
 from rbs import FSAHelperFunctions
+from rbs import NealCoverFunctions
 from rbs import AssociationBuilder
 from rbs import RuleBasedSystemBuilder
 
 sim.setup(timestep=1.0,min_delay=1.0,max_delay=1.0, debug=0)
 
-simTime = 100
+simTime = 200
 
-fsa = FSAHelperFunctions(sim, "nest")
+neal = NealCoverFunctions("nest", sim)
+fsa = FSAHelperFunctions(sim, "nest", neal)
 
-associationBuilder = AssociationBuilder(sim, "nest")
+associationBuilder = AssociationBuilder(sim, fsa, neal, "nest")
 associationBuilder.useBases("bases")
 associationBuilder.useRelationships("props", "rels", "assocs")
-association = associationBuilder.build()
+topology, baseService, propertyService, relationshipService = associationBuilder.build()
 
 rbsBuilder = RuleBasedSystemBuilder(sim, "nest", fsa)
-rbsBuilder.useAssociation(association)
+rbsBuilder.useAssociation(topology, baseService, propertyService, relationshipService)
 rbs = rbsBuilder.build()
 
 rbs.addRule(
@@ -97,7 +99,9 @@ rbs.addRule(
 
 rbs.addFact("question", ("does", "canary", "eats", "food"))
 
-#rbs.addFact("question", ("is", "canary", "animal"))
+rbs.addFact("question", ("is", "canary", "animal"))
+
+neal.nealApplyProjections()
 
 ## Run
 sim.run(simTime)
