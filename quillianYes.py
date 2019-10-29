@@ -6,8 +6,7 @@ Simple test for monkey reach using associations
 import pyNN.nest as sim
 from rbs import FSAHelperFunctions
 from rbs import NealCoverFunctions
-from rbs import AssociationBuilder
-from rbs import RuleBasedSystemBuilder
+from rbs import NeuralCognitiveArchitectureBuilder
 
 sim.setup(timestep=1.0,min_delay=1.0,max_delay=1.0, debug=0)
 
@@ -16,16 +15,13 @@ simTime = 200
 neal = NealCoverFunctions("nest", sim)
 fsa = FSAHelperFunctions(sim, "nest", neal)
 
-associationBuilder = AssociationBuilder(sim, fsa, neal, "nest")
-associationBuilder.useBases("bases")
-associationBuilder.useRelationships("props", "rels", "assocs")
-topology, baseService, propertyService, relationshipService = associationBuilder.build()
+narcBuilder = NeuralCognitiveArchitectureBuilder(sim, "nest", fsa, neal)
+narcBuilder.useBases("bases")
+narcBuilder.useRelationships("props", "rels", "assocs")
 
-rbsBuilder = RuleBasedSystemBuilder(sim, "nest", fsa)
-rbsBuilder.useAssociation(topology, baseService, propertyService, relationshipService)
-rbs = rbsBuilder.build()
+narc = narcBuilder.build()
 
-rbs.addRule(
+narc.addRule(
     "askIsChildParent",
     [
         (True, "question", ("is", "?subType", "?superType"), "f1")
@@ -38,7 +34,7 @@ rbs.addRule(
     ]
 )
 
-rbs.addRule(
+narc.addRule(
     "resolveIsChildParent",
     [
         (True, "question", ("is", "?subType", "?superType"), "f1"),
@@ -51,7 +47,7 @@ rbs.addRule(
     ]
 )
 
-rbs.addRule(
+narc.addRule(
     "cleanupIsChildParent",
     [
         (True, "isType", ("?subType", "?superType"), "f1"),
@@ -65,7 +61,7 @@ rbs.addRule(
     ]
 )
 
-rbs.addRule(
+narc.addRule(
     "hasBaseOperationProperty",
     [
         (True, "question", ("does", "?base", "?rel", "?property"), "f1")
@@ -77,7 +73,7 @@ rbs.addRule(
     ]
 )
 
-rbs.addRule(
+narc.addRule(
     "resolveBaseOperationProperty",
     [
         (True, "question", ("does", "?base", "?rel", "?property"), "f1"),
@@ -97,9 +93,9 @@ rbs.addRule(
     ]
 )
 
-rbs.addFact("question", ("does", "canary", "eats", "food"))
+narc.addFact("question", ("does", "canary", "eats", "food"))
 
-rbs.addFact("question", ("is", "canary", "animal"))
+narc.addFact("question", ("is", "canary", "animal"))
 
 neal.nealApplyProjections()
 
@@ -107,6 +103,6 @@ neal.nealApplyProjections()
 sim.run(simTime)
 
 ## Print data
-rbs.printSpikes()
+narc.printSpikes()
 
 sim.end()

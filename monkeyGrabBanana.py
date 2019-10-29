@@ -8,17 +8,16 @@ import pyNN.nest as sim
 
 from rbs import FSAHelperFunctions
 from rbs import NealCoverFunctions
-from rbs import RuleBasedSystemBuilder
+from rbs import NeuralCognitiveArchitectureBuilder
 
 sim.setup(timestep=1.0,min_delay=1.0,max_delay=1.0, debug=0)
 
 neal = NealCoverFunctions("nest", sim)
 fsa = FSAHelperFunctions("nest", sim, neal)
 
-rbsBuilder = RuleBasedSystemBuilder(sim, "nest", fsa)
-rbs = rbsBuilder.build()
+narc = NeuralCognitiveArchitectureBuilder(sim, "nest", fsa, neal).build()
 
-rbs.addRule(   
+narc.addRule(   
     "MonkeyCanReach",
     [
         (True, "MonkeyCanReach", ("?type",),"b")
@@ -29,12 +28,12 @@ rbs.addRule(
     ]
 )
 
-rbs.addFact("MonkeyCanReach", ("banana",))
+narc.addFact("MonkeyCanReach", ("banana",))
 
 neal.nealApplyProjections()
 
 sim.run(50)
 
-rbs.printSpikes()
+narc.printSpikes()
 
 sim.end()

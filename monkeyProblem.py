@@ -1,6 +1,6 @@
 from rbs import FSAHelperFunctions
 from rbs import NealCoverFunctions
-from rbs import RuleBasedSystemBuilder
+from rbs import NeuralCognitiveArchitectureBuilder
 
 class MonekyProblem:
 
@@ -8,9 +8,9 @@ class MonekyProblem:
         self.neal = NealCoverFunctions(simulator, sim)
         self.fsa = FSAHelperFunctions(simulator, sim, self.neal)
 
-        self.rbs = RuleBasedSystemBuilder(sim, simulator, self.fsa).build()
+        self.narc = NeuralCognitiveArchitectureBuilder(sim, simulator, self.fsa, self.neal).build()
 
-        self.rbs.addRule(
+        self.narc.addRule(
             "eatFruit",
             [
                 (True, "monkey-has", ("?type",), "a")
@@ -21,7 +21,7 @@ class MonekyProblem:
             ]
         )
 
-        self.rbs.addRule(
+        self.narc.addRule(
             "monkeyHasFruit",
             [
                 (True, "chairAt", ("?pos",), "a"),
@@ -33,7 +33,7 @@ class MonekyProblem:
             ]
         )
 
-        self.rbs.addRule(
+        self.narc.addRule(
             "pushChair", 
             # if
             [
@@ -48,6 +48,6 @@ class MonekyProblem:
         )
 
     def printSpikes(self):
-        self.rbs.printSpikes()
+        self.narc.printSpikes()
 
     
