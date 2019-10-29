@@ -7,8 +7,7 @@ class MonekyProblem:
     def __init__(self, sim, simulator):
         self.neal = NealCoverFunctions(simulator, sim)
         self.fsa = FSAHelperFunctions(simulator, sim, self.neal)
-
-        self.narc = NeuralCognitiveArchitectureBuilder(sim, simulator, self.fsa, self.neal).build()
+        self.narc = NeuralCognitiveArchitectureBuilder(simulator, sim, self.fsa, self.neal).build()
 
         self.narc.addRule(
             "eatFruit",

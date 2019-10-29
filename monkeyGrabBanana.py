@@ -14,8 +14,7 @@ sim.setup(timestep=1.0,min_delay=1.0,max_delay=1.0, debug=0)
 
 neal = NealCoverFunctions("nest", sim)
 fsa = FSAHelperFunctions("nest", sim, neal)
-
-narc = NeuralCognitiveArchitectureBuilder(sim, "nest", fsa, neal).build()
+narc = NeuralCognitiveArchitectureBuilder("nest", sim, fsa, neal).build()
 
 narc.addRule(   
     "MonkeyCanReach",

@@ -15,7 +15,7 @@ simTime = 200
 neal = NealCoverFunctions("nest", sim)
 fsa = FSAHelperFunctions("nest", sim, neal)
 
-narcBuilder = NeuralCognitiveArchitectureBuilder(sim, "nest", fsa, neal)
+narcBuilder = NeuralCognitiveArchitectureBuilder("nest", sim, fsa, neal)
 narcBuilder.useBasesFile("bases")
 narcBuilder.useRelationshipsFiles("props", "rels", "assocs")
 
