@@ -97,12 +97,12 @@ narc.addFact("question", ("does", "canary", "eats", "food"))
 
 narc.addFact("question", ("is", "canary", "animal"))
 
-neal.nealApplyProjections()
+narc.apply()
 
 ## Run
 sim.run(simTime)
 
 ## Print data
-narc.printSpikes()
+#narc.printSpikes()
 
 sim.end()
