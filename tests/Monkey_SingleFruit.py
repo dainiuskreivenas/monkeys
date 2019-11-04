@@ -22,7 +22,7 @@ mp = MonekyProblem(sim, "nest")
 mp.narc.addFact("chairAt", (1,))
 mp.narc.addFact("fruit", ("banana",0))
 
-mp.neal.nealApplyProjections()
+mp.narc.apply()
 
 sim.run(200)
 

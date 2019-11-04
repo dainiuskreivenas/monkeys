@@ -38,26 +38,16 @@ narc.addRule(
     "resolveIsChildParent",
     [
         (True, "question", ("is", "?subType", "?superType"), "f1"),
-        ("link", ("base", "?superType", "query"), "f2"),
+        ("link", ("base", "?subType", "query"), "f2"),
+        ("link", ("base", "?superType", "query"), "f3"),
+        ("prime", "base", "f4")
     ],
     [
         ("assert", ("isType", ("?subType", "?superType"))),
         ("retract", "f1"),
-        ("retract", "f2")
-    ]
-)
-
-narc.addRule(
-    "cleanupIsChildParent",
-    [
-        (True, "isType", ("?subType", "?superType"), "f1"),
-        ("link", ("base", "?subType", "query"), "f2"),
-        ("prime", "base", "f3")
-    ],
-    [
-        ("retract", "f1"),
         ("retract", "f2"),
-        ("retract", "f3")
+        ("retract", "f3"),
+        ("retract", "f4"),
     ]
 )
 
@@ -95,7 +85,7 @@ narc.addRule(
 
 narc.addFact("question", ("does", "canary", "eats", "food"))
 
-narc.addFact("question", ("is", "canary", "animal"))
+narc.addFact("question", ("is", "canary", "bird"))
 
 narc.apply()
 
@@ -103,6 +93,6 @@ narc.apply()
 sim.run(simTime)
 
 ## Print data
-#narc.printSpikes()
+narc.printSpikes()
 
 sim.end()
