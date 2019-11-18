@@ -27,7 +27,7 @@ mp.narc.addFact("chairAt", (2,))
 mp.narc.addFact("fruit",("banana",0))
 mp.narc.addFact("fruit",("apple",1))
 
-mp.neal.nealApplyProjections()
+mp.narc.apply()
 
 sim.run(200)
 
