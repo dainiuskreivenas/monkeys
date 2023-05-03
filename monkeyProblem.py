@@ -1,6 +1,6 @@
-from rbs import FSAHelperFunctions
-from rbs import NealCoverFunctions
-from rbs import NeuralCognitiveArchitectureBuilder
+from rbs.stateMachineClass import FSAHelperFunctions
+from rbs.nealCoverClass import NealCoverFunctions
+from rbs.narcBuilder import NeuralCognitiveArchitectureBuilder
 
 class MonekyProblem:
 

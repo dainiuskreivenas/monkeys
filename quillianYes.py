@@ -4,9 +4,9 @@ Simple test for monkey reach using associations
 
 """
 import pyNN.nest as sim
-from rbs import FSAHelperFunctions
-from rbs import NealCoverFunctions
-from rbs import NeuralCognitiveArchitectureBuilder
+from rbs.stateMachineClass import FSAHelperFunctions
+from rbs.nealCoverClass import NealCoverFunctions
+from rbs.narcBuilder import NeuralCognitiveArchitectureBuilder
 
 sim.setup(timestep=1.0,min_delay=1.0,max_delay=1.0, debug=0)
 
